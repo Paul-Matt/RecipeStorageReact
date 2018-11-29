@@ -22,7 +22,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	
 	 @Override
 	    protected void configure(HttpSecurity http) throws Exception {
-	        http
+		 http.cors().and().authorizeRequests().anyRequest().permitAll();   
+		 /* temporarily commented out for testing purposes http
 	        .authorizeRequests().antMatchers("/css/**", "/", "/recipelist").permitAll() // Enable css when logged out
 	        .antMatchers("/delete/{id}").hasRole("ADMIN")
 	        .and()
@@ -35,7 +36,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	          .permitAll()
 	          .and()
 	      .logout()
-	          .permitAll();
+	          .permitAll(); */
 	    }
 
 	    @Autowired
