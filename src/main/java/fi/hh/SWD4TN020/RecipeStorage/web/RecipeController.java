@@ -50,6 +50,7 @@ public class RecipeController {
 		return "Recipelist";
 	}
 
+
 	// Listaa reseptit REST
 	@RequestMapping(value = "/recipes", method = RequestMethod.GET)
 	public @ResponseBody List<Recipe> recipeListRest() {
