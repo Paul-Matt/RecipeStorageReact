@@ -27,7 +27,10 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	  @Override
 	  protected void configure(HttpSecurity http) throws Exception {
-		 http.csrf().disable().cors().and().authorizeRequests()
+		// This row will allow access to all endpoints temporarily
+		  http.cors().and().authorizeRequests().anyRequest().permitAll();
+		  /* Temporarily commented out
+		   *  http.csrf().disable().cors().and().authorizeRequests()
 		  .antMatchers(HttpMethod.POST, "/login").permitAll()
 	        .anyRequest().authenticated()
 	        .and()
@@ -37,6 +40,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	        // Filter for other requests to check JWT in header
 	        .addFilterBefore(new AuthenticationFilter(),
 	                UsernamePasswordAuthenticationFilter.class);
+	                */
 	  }
   
 	  //  CORS (Cross-Origin Resource Sharing) filter in the security
