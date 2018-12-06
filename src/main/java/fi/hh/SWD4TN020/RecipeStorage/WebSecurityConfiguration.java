@@ -27,10 +27,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	  @Override
 	  protected void configure(HttpSecurity http) throws Exception {
-		// This row will allow access to all endpoints temporarily
-		  http.cors().and().authorizeRequests().anyRequest().permitAll();
-		  /* Temporarily commented out
-		   *  http.csrf().disable().cors().and().authorizeRequests()
+		  http.csrf().disable().cors().and().authorizeRequests()
 		  .antMatchers(HttpMethod.POST, "/login").permitAll()
 	        .anyRequest().authenticated()
 	        .and()
@@ -40,7 +37,6 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	        // Filter for other requests to check JWT in header
 	        .addFilterBefore(new AuthenticationFilter(),
 	                UsernamePasswordAuthenticationFilter.class);
-	                */
 	  }
   
 	  //  CORS (Cross-Origin Resource Sharing) filter in the security
@@ -60,43 +56,12 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	      return source;
 	}	
 	
+	//vertailee kryptattuja salasanoja
+	//admin admin käyttis ja salasana
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
 	}
 
-/* @Configuration
-@EnableGlobalMethodSecurity(prePostEnabled = true) //use user entities instead of in-memory users in authentication
-@EnableWebSecurity
-public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
-	
-	@Autowired
-	private UserDetailServiceImpl userDetailsService;
-	
-	 @Override
-	    protected void configure(HttpSecurity http) throws Exception {
-		 http.cors().and().authorizeRequests().anyRequest().permitAll();   
-		 /* temporarily commented out for testing purposes http
-	        .authorizeRequests().antMatchers("/css/**", "/", "/recipelist").permitAll() // Enable css when logged out
-	        .antMatchers("/delete/{id}").hasRole("ADMIN")
-	        .and()
-	        .authorizeRequests()
-	          .anyRequest().authenticated()
-	          .and()
-	      .formLogin()
-	          .loginPage("/login")
-	          .defaultSuccessUrl("/recipelist")
-	          .permitAll()
-	          .and()
-	      .logout()
-	          .permitAll(); 
-	    }
-
-	    @Autowired
-	    //vertailee kryptattuja salasanoja
-	    //admin admin käyttis ja salasana
-	    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-	        auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
-	    } */
 
 }
