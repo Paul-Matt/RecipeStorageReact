@@ -17,6 +17,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name="recipe")
 public class Recipe {
 	@Id
+	@Column(name="recipe_id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	@NotNull
@@ -33,7 +34,7 @@ public class Recipe {
 
 	@ManyToOne
 	@JsonIgnore
-	@JoinColumn(name = "categoryid")
+	@JoinColumn(name = "category_id")
 	private Category category;
 
 	public Recipe() {
